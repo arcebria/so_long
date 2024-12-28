@@ -17,11 +17,11 @@ int		add_map(t_map *map,  char **tmp_map)
 	int		y;
 	int		x;
 
-	map->map = ft_calloc(sizeof(char *), map->len + 1);
+	map->map = ft_calloc(sizeof(char *), map->height + 1);
 	if (!map->map)
 		error_exit(NULL, 6);
 	y = -1;
-	while (++y < map->len)
+	while (++y < map->height)
 	{
 		x = -1;
 		map->map[y] = ft_calloc(sizeof(char), map->widht + 1);
@@ -55,7 +55,7 @@ int	sl_flood_fill(char **tmp_map, t_player p)
 {
 	int		y;
 	int		x;
-
+ 	
 	fill_map(tmp_map, p.y, p.x, "0EC");
 	y = -1;
 	while (tmp_map[++y])

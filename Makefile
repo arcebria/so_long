@@ -3,7 +3,7 @@ NAME = beta
 
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
-SRCS = src/main.c src/parsing.c src/parsing_utils.c src/errors.c
+SRCS = src/main.c src/parsing.c src/parsing_utils.c src/errors.c src/game_initialiser.c
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a

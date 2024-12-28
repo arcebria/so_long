@@ -22,20 +22,20 @@ void	syntax_checker(t_map *map, char **tmp_map, t_player *p)
 	int	x;
 
 	x = 0;
-	while (tmp_map[map->len][x])
+	while (tmp_map[map->height][x])
 	{
-		if (!ft_strchr("10PEC", tmp_map[map->len][x]))
+		if (!ft_strchr("10PEC", tmp_map[map->height][x]))
 			error_exit(tmp_map, 1);
-		if ((!map->len || !x || !tmp_map[map->len + 1] || \
-		!tmp_map[map->len][x + 1]) && tmp_map[map->len][x] != '1')
+		if ((!map->height || !x || !tmp_map[map->height + 1] || \
+		!tmp_map[map->height][x + 1]) && tmp_map[map->height][x] != '1')
 			error_exit(tmp_map, 2);
-		map->e_count += (tmp_map[map->len][x] == 'E');
-		map->c_count += (tmp_map[map->len][x] == 'C');
-		map->p_count += (tmp_map[map->len][x] == 'P');
-		if (tmp_map[map->len][x++] == 'P')
-			set_player(p, x - 1, map->len, tmp_map);
+		map->e_count += (tmp_map[map->height][x] == 'E');
+		map->c_count += (tmp_map[map->height][x] == 'C');
+		map->p_count += (tmp_map[map->height][x] == 'P');
+		if (tmp_map[map->height][x++] == 'P')
+			set_player(p, x - 1, map->height, tmp_map);
 	}
-	if (map->len == 0)
+	if (map->height == 0)
 		map->widht = x;
 	else if (map->widht != x)
 		error_exit(tmp_map, 3);
@@ -77,10 +77,10 @@ void	parsing(t_map *map, int fd, t_player *p)
 	tmp_map = get_map(fd);
 	ft_bzero(map, sizeof(t_map));
 	ft_bzero(p, sizeof(t_player));
-	while (tmp_map[map->len])
+	while (tmp_map[map->height])
 	{
 		syntax_checker(map, tmp_map, p);
-		map->len++;
+		map->height++;
 	}
 	if (map->c_count < 1 || map->e_count != 1 || map->p_count != 1)
 		error_exit(tmp_map, 4);
@@ -89,4 +89,5 @@ void	parsing(t_map *map, int fd, t_player *p)
 	if (add_map(map, tmp_map))
 		error_exit(map->map, 7);
 	ft_free_array(tmp_map);
+	close (fd);
 }

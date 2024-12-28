@@ -26,6 +26,8 @@ int	main(int ac, char **av)
 	if (fd < 0)
 		return (ft_printf(ERROR_OPEN));
 	ft_bzero(&mlx, sizeof(t_win));
-	parsing(&mlx.map, fd, &mlx.p);
+	parsing(&mlx.map, fd, &mlx.player);
+	if (!init_game(&mlx))
+		return (ft_printf(ERROR_INIT), 1);
 	ft_free_array(mlx.map.map); //ESTO SOBRA, SOLO PARA NO TENER LEAKS
 }
