@@ -6,11 +6,11 @@
 /*   By: arcebria <arcebria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 17:45:04 by arcebria          #+#    #+#             */
-/*   Updated: 2024/12/21 20:58:33 by arcebria         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:23:26 by arcebria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/beta.h"
+#include "../inc/so_long.h"
 
 void	error_exit(char **map, int n)
 {
@@ -28,7 +28,8 @@ void	error_exit(char **map, int n)
 		ft_putstr_fd(ERROR_MALLOC, 2);
 	else if (n == 7)
 		ft_putstr_fd(ERROR_MAP, 2);
+	else if (n == 8)
+		ft_putstr_fd(EMPTY_MAP, 2);
 	ft_free_array(map);
 	exit (1);
 }
-

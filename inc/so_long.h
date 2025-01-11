@@ -6,7 +6,7 @@
 /*   By: arcebria <arcebria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:02:11 by arcebria          #+#    #+#             */
-/*   Updated: 2024/12/21 20:58:30 by arcebria         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:50:03 by arcebria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,56 @@
 # define ERROR_PATH "Error\nImposible alcanzar los objetivos.\n"
 # define ERROR_MALLOC "Error\nFallo al asignar memoria.\n"
 # define ERROR_MAP "Error\nFallo al cargar el mapa.\n"
-# define ERROR_INIT "Error\nFallo al inicializar el juego\n"
+# define EMPTY_MAP "Error\nLínea vacía encontrada.\n"
+# define ERROR_INIT "Error\nFallo al inicializar el juego.\n"
+# define WIN_MESSAGE "Enhorabuena!! Has atrapado a todos.\n"
+# define LOSE_MESSAGE "Que pena!! El Clefairy salvaje te atrapó.\n"
+# define ESC_MESSAGE "Has salido del juego.\n"
 
 # include "../libft/libft.h"
 # include "../libft/ft_printf.h"
 # include "../libft/get_next_line.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+# include <time.h>
 
-typedef struct s_data
+typedef struct s_line
 {
-	void	*img;
-	int		len;
-	int		widht;
-}	t_data;
+	char	*current_line;
+	char	*all_in_one;
+	char	*tmp_line;
+	char	**map;
+	int		flag;
+}	t_line;
+
+typedef struct s_txt
+{
+	mlx_texture_t	*fl;
+	mlx_texture_t	*wl;
+	mlx_texture_t	*exc;
+	mlx_texture_t	*exo;
+	mlx_texture_t	*pb;
+	mlx_texture_t	*e;
+	mlx_texture_t	*t1;
+	mlx_texture_t	*t2;
+	mlx_texture_t	*t3;
+	mlx_texture_t	*t4;
+	mlx_texture_t	*count;
+}	t_txt;
+
+typedef struct s_img
+{
+	mlx_image_t	*fl;
+	mlx_image_t	*wl;
+	mlx_image_t	*exc;
+	mlx_image_t	*exo;
+	mlx_image_t	*pb;
+	mlx_image_t	*e;
+	mlx_image_t	*t1;
+	mlx_image_t	*t2;
+	mlx_image_t	*t3;
+	mlx_image_t	*t4;
+	mlx_image_t	*count;
+}	t_img;
 
 typedef struct s_map
 {
@@ -45,7 +82,6 @@ typedef struct s_map
 	int		p_count;
 	int		e_count;
 	char	**map;
-	t_data	*sprites;
 }	t_map;
 
 typedef struct s_player
@@ -54,16 +90,15 @@ typedef struct s_player
 	int		y;
 	int		collect_counter;
 	int		moves;
-	int		sprite;
 }	t_player;
 
 typedef struct s_win
 {
-	void		*mlx;
-	mlx_t		*win;
-	int			event;
-	t_player	player;
+	mlx_t		*mlx;
+	t_player	p;
 	t_map		map;
+	t_txt		*txt;
+	t_img		*img;
 }	t_win;
 
 void	parsing(t_map *map, int fd, t_player *p);
@@ -74,7 +109,18 @@ void	set_player(t_player *p, int x, int y, char **tmp_map);
 int		sl_flood_fill(char **tmp_map, t_player p);
 void	fill_map(char **tmp_map, int y, int x, char *path);
 void	error_exit(char **map, int n);
-int		add_map(t_map *map,  char **tmp_map);
+int		add_map(t_map *map, char **tmp_map);
 int		init_game(t_win *mlx);
+void	set_textures(t_win *mlx);
+void	set_images(t_win *mlx);
+void	render_map(t_win *mlx);
+void	moves(mlx_key_data_t keydata, void *param);
+void	collect_pokeballs(t_win *game);
+void	move_enemy(t_win *game);
+void	game_ender_w(t_win *game);
+void	game_ender_l(t_win *game);
+void	render_counter(t_win *game);
+void	manage_end(int i);
+int	touch_enemy(t_win *g);
 
 #endif

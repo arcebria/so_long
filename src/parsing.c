@@ -6,11 +6,11 @@
 /*   By: arcebria <arcebria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:02:05 by arcebria          #+#    #+#             */
-/*   Updated: 2024/12/21 20:58:31 by arcebria         ###   ########.fr       */
+/*   Updated: 2025/01/11 19:36:05 by arcebria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/beta.h"
+#include "../inc/so_long.h"
 
 /*Esta funcion checkea que el mapa cumpla con las siguientes especificaciones
 - solo contiene "10CEP"
@@ -43,30 +43,39 @@ void	syntax_checker(t_map *map, char **tmp_map, t_player *p)
 
 /*esta funcion convierte el .ber en un array de strings*/
 
+char	*join_lines(char *all_in_one, char *current_line)
+{
+	char	*tmp_line;
+
+	if (current_line[0] == '\n')
+		error_exit(NULL, 8);
+	tmp_line = all_in_one;
+	all_in_one = ft_strjoin(tmp_line, current_line);
+	free(current_line);
+	current_line = NULL;
+	free(tmp_line);
+	return (all_in_one);
+}
+
 char	**get_map(int fd)
 {
 	char	*current_line;
 	char	*all_in_one;
-	char	*tmp_line;
 	char	**map;
 
-	current_line = NULL;
 	all_in_one = NULL;
-	while (current_line || !all_in_one)
+	current_line = get_next_line(fd);
+	if (!current_line)
+		error_exit(NULL, 8);
+	while (current_line)
 	{
-		tmp_line = all_in_one;
-		if (current_line)
-		{
-			all_in_one = ft_strjoin(tmp_line, current_line);
-			free (current_line);
-			free(tmp_line);
-		}
+		all_in_one = join_lines(all_in_one, current_line);
 		current_line = get_next_line(fd);
 	}
 	map = ft_split(all_in_one, '\n');
 	if (!map)
 		ft_free_array(map);
-	free(all_in_one);
+	free (all_in_one);
 	return (map);
 }
 
@@ -89,5 +98,6 @@ void	parsing(t_map *map, int fd, t_player *p)
 	if (add_map(map, tmp_map))
 		error_exit(map->map, 7);
 	ft_free_array(tmp_map);
-	close (fd);
+	map->height *= 32;
+	map->widht *= 32;
 }

@@ -1,12 +1,78 @@
-#include"../inc/beta.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_initialiser.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arcebria <arcebria@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/08 20:44:14 by arcebria          #+#    #+#             */
+/*   Updated: 2025/01/11 18:23:12 by arcebria         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		init_game(t_win *mlx)
+#include "../inc/so_long.h"
+
+void	set_textures(t_win *g)
 {
-	mlx->player.moves = 0;
-	mlx->player.collect_counter = 0;
-	//mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx->mlx = mlx_init(mlx->map.widht, mlx->map.height, "BETA", true);
-	if (!mlx->mlx)
+	g->txt = ft_calloc(1, sizeof(t_txt));
+	g->txt->fl = mlx_load_png("./sp/fl.png");
+	g->txt->wl = mlx_load_png("./sp/wl.png");
+	g->txt->exc = mlx_load_png("./sp/ex/exc.png");
+	g->txt->exo = mlx_load_png("./sp/ex/exo.png");
+	g->txt->pb = mlx_load_png("./sp/it/pb.png");
+	g->txt->e = mlx_load_png("./sp/e/e.png");
+	g->txt->t1 = mlx_load_png("./sp/ch/t1.png");
+	g->txt->t2 = mlx_load_png("./sp/ch/t2.png");
+	g->txt->t3 = mlx_load_png("./sp/ch/t3.png");
+	g->txt->t4 = mlx_load_png("./sp/ch/t4.png");
+	g->txt->count = mlx_load_png("./sp/count/count.png");
+}
+
+void	delete_textures(t_win *g)
+{
+	mlx_delete_texture(g->txt->fl);
+	mlx_delete_texture(g->txt->wl);
+	mlx_delete_texture(g->txt->exc);
+	mlx_delete_texture(g->txt->exo);
+	mlx_delete_texture(g->txt->pb);
+	mlx_delete_texture(g->txt->e);
+	mlx_delete_texture(g->txt->t1);
+	mlx_delete_texture(g->txt->t2);
+	mlx_delete_texture(g->txt->t3);
+	mlx_delete_texture(g->txt->t4);
+	mlx_delete_texture(g->txt->count);
+}
+
+void	set_images(t_win *g)
+{
+	g->img = ft_calloc(1, sizeof(t_img));
+	g->img->fl = mlx_texture_to_image(g->mlx, g->txt->fl);
+	g->img->wl = mlx_texture_to_image(g->mlx, g->txt->wl);
+	g->img->exc = mlx_texture_to_image(g->mlx, g->txt->exc);
+	g->img->exo = mlx_texture_to_image(g->mlx, g->txt->exo);
+	g->img->pb = mlx_texture_to_image(g->mlx, g->txt->pb);
+	g->img->e = mlx_texture_to_image(g->mlx, g->txt->e);
+	g->img->t1 = mlx_texture_to_image(g->mlx, g->txt->t1);
+	g->img->t2 = mlx_texture_to_image(g->mlx, g->txt->t2);
+	g->img->t3 = mlx_texture_to_image(g->mlx, g->txt->t3);
+	g->img->t4 = mlx_texture_to_image(g->mlx, g->txt->t4);
+	g->img->count = mlx_texture_to_image(g->mlx, g->txt->count);
+	delete_textures(g);
+}
+
+int	init_game(t_win *game)
+{
+	game->p.moves = 0;
+	game->p.collect_counter = 0;
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	game->mlx = mlx_init(game->map.widht, game->map.height, "So_long", true);
+	if (!game->mlx)
 		return (0);
+	set_textures(game);
+	set_images(game);
+	render_map(game);
+	mlx_key_hook(game->mlx, &moves, game);
+	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
 	return (1);
 }

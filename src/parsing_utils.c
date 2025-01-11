@@ -6,13 +6,13 @@
 /*   By: arcebria <arcebria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:02:02 by arcebria          #+#    #+#             */
-/*   Updated: 2024/12/21 20:58:32 by arcebria         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:24:05 by arcebria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/beta.h"
+#include "../inc/so_long.h"
 
-int		add_map(t_map *map,  char **tmp_map)
+int	add_map(t_map *map, char **tmp_map)
 {
 	int		y;
 	int		x;
@@ -55,7 +55,7 @@ int	sl_flood_fill(char **tmp_map, t_player p)
 {
 	int		y;
 	int		x;
- 	
+
 	fill_map(tmp_map, p.y, p.x, "0EC");
 	y = -1;
 	while (tmp_map[++y])
