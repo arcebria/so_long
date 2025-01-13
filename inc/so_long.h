@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   beta.h                                             :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcebria <arcebria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:02:11 by arcebria          #+#    #+#             */
-/*   Updated: 2025/01/11 16:50:03 by arcebria         ###   ########.fr       */
+/*   Updated: 2025/01/12 00:30:27 by arcebria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BETA_H
-# define BETA_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # define ERROR_ARG "Error\nArchivo de mapa no proporcionado.\n"
 # define ERROR_FORMAT "Error\nArchivo de mapa incorrecto.\n"
@@ -48,7 +48,9 @@ typedef struct s_txt
 {
 	mlx_texture_t	*fl;
 	mlx_texture_t	*wl;
-	mlx_texture_t	*exc;
+	mlx_texture_t	*zubat1;
+	mlx_texture_t	*zubat2;
+	mlx_texture_t	*zubat3;
 	mlx_texture_t	*exo;
 	mlx_texture_t	*pb;
 	mlx_texture_t	*e;
@@ -63,7 +65,9 @@ typedef struct s_img
 {
 	mlx_image_t	*fl;
 	mlx_image_t	*wl;
-	mlx_image_t	*exc;
+	mlx_image_t	*zubat1;
+	mlx_image_t	*zubat2;
+	mlx_image_t	*zubat3;
 	mlx_image_t	*exo;
 	mlx_image_t	*pb;
 	mlx_image_t	*e;
@@ -113,7 +117,7 @@ int		add_map(t_map *map, char **tmp_map);
 int		init_game(t_win *mlx);
 void	set_textures(t_win *mlx);
 void	set_images(t_win *mlx);
-void	render_map(t_win *mlx);
+void	render_map(t_win *g);
 void	moves(mlx_key_data_t keydata, void *param);
 void	collect_pokeballs(t_win *game);
 void	move_enemy(t_win *game);
@@ -121,6 +125,7 @@ void	game_ender_w(t_win *game);
 void	game_ender_l(t_win *game);
 void	render_counter(t_win *game);
 void	manage_end(int i);
-int	touch_enemy(t_win *g);
+int		touch_enemy(t_win *g);
+void	hook_loop(void *param);
 
 #endif

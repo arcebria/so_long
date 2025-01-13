@@ -6,7 +6,7 @@
 /*   By: arcebria <arcebria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 20:53:55 by arcebria          #+#    #+#             */
-/*   Updated: 2025/01/11 18:23:19 by arcebria         ###   ########.fr       */
+/*   Updated: 2025/01/12 00:32:39 by arcebria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,5 @@ void	collect_pokeballs(t_win *game)
 		i++;
 	}
 	if (game->p.collect_counter == game->map.c_count)
-	{
-		game->img->exc->instances->enabled = false;
 		game->img->exo->instances->enabled = true;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: arcebria <arcebria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:07:43 by arcebria          #+#    #+#             */
-/*   Updated: 2025/01/11 18:49:35 by arcebria         ###   ########.fr       */
+/*   Updated: 2025/01/12 00:33:45 by arcebria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 void	render_exit(t_win *g, int y, int x)
 {
-	mlx_image_to_window(g->mlx, g->img->exc, x * 32, y * 32);
+	mlx_image_to_window(g->mlx, g->img->zubat1, x * 32, y * 32);
+	mlx_image_to_window(g->mlx, g->img->zubat2, x * 32, y * 32);
+	mlx_image_to_window(g->mlx, g->img->zubat3, x * 32, y * 32);
 	mlx_image_to_window(g->mlx, g->img->exo, x * 32, y * 32);
+	g->img->zubat2->instances->enabled = false;
+	g->img->zubat3->instances->enabled = false;
 	g->img->exo->instances->enabled = false;
 }
 
