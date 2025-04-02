@@ -30,6 +30,6 @@ Utilicé varias **estructuras de datos** para organizar la información del mapa
 
 El resultado final fue un **juego funcional en 2D** que permitía a los jugadores moverse a través de un mapa, recoger objetos y llegar a un objetivo final. El proyecto me permitió aprender sobre la **programación de juegos** a un nivel básico pero efectivo, y me dio una comprensión más profunda de cómo manejar gráficos, eventos y la lógica de juegos sencillos. Este proyecto me proporcionó las herramientas necesarias para adentrarme en el desarrollo de juegos más complejos en el futuro.
 
-**Enlace para clonar la libreria MLX42**
+**Enlace para clonar la librería MLX42**
 
 https://github.com/codam-coding-college/MLX42
