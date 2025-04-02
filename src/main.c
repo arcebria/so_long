@@ -16,9 +16,7 @@ int	main(int ac, char **av)
 {
 	t_win	mlx;
 	int		fd;
-	int		fd1;
 
-	fd1 = 0;
 	srand(time(NULL));
 	if (ac != 2)
 		return (ft_printf(ERROR_ARG));
